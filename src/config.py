@@ -12,7 +12,7 @@ target_guild_raw = os.getenv("TARGET_GUILD_ID", "")
 TARGET_GUILD_IDS = [int(gid.strip()) for gid in target_guild_raw.split(',') if gid.strip().isdigit()]
 TARGET_GUILD_ID = TARGET_GUILD_IDS[0] if TARGET_GUILD_IDS else None
 ADMIN_IDS = [int(uid.strip()) for uid in os.getenv("ADMIN_IDS", "").split(',') if uid.strip().isdigit()]
-ALLOWED_CHANNELS = [int(c.strip()) for c in os.getenv("ALLOWED_CHANNELS").split(",")]
+ALLOWED_CHANNELS = [int(c.strip()) for c in os.getenv("ALLOWED_CHANNELS", "").split(",") if c.strip().isdigit()]
 
 # --- Embed 文本配置 ---
 EMBED_TITLE = os.getenv("EMBED_TITLE")
@@ -52,13 +52,13 @@ SUMMARY_SETUP = int(os.getenv("SUMMARY_SETUP",0))
 BASE_URL = os.getenv('BASE_URL')
 MODEL = os.getenv('MODEL')
 LLM_FORMAT = os.getenv("LLM_FORMAT", "openai")
-if int(os.getenv('IMG_VIEW')) == 1:
+if int(os.getenv('IMG_VIEW', 0)) == 1:
     IMG_VIEW = True
 else:
     IMG_VIEW = False
 ADDITIONAL_HEADER = os.getenv('ADDITIONAL_HEADER')
 BODY_ARGUMENT = os.getenv('BODY_ARGUMENT')
-LLM_ALLOW_CHANNELS = [int(c.strip()) for c in os.getenv("LLM_ALLOW_CHANNELS").split(",")]
+LLM_ALLOW_CHANNELS = [int(c.strip()) for c in os.getenv("LLM_ALLOW_CHANNELS", "").split(",") if c.strip().isdigit()]
 LLM_CHAT_SETUP = int(os.getenv("LLM_CHAT_SETUP",0))
 if int(os.getenv('GEMINI_SEARCH', 0)) == 1:
     GEMINI_SEARCH = True
