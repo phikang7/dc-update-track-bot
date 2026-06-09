@@ -17,6 +17,7 @@ from src.lottery.models import (
     validate_lottery_config,
     build_draw_time_preview_text,
     format_lottery_draw_time,
+    normalize_lottery_time,
 )
 from src.lottery import db as lottery_db
 from src.lottery.service import generate_quiz_question, has_sufficient_prize_count
@@ -218,6 +219,8 @@ async def publish_lottery(interaction: discord.Interaction, lottery_id: str):
 
     draw_type = lottery.get("draw_type")
     original_draw_time = lottery.get("draw_time")
+    if original_draw_time:
+        original_draw_time = normalize_lottery_time(original_draw_time)
     actual_draw_time = original_draw_time
     activated_now = False
 
